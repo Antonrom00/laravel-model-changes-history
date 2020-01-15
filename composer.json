@@ -1,0 +1,40 @@
+{
+  "name": "antonrom/model-changes-history",
+  "description": "Model changes history for laravel",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "laravel "
+  ],
+  "authors": [
+    {
+      "name": "Antonrom",
+      "email": "anton.romanyuk.2000@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.1",
+    "laravel/framework": "~5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Antonrom\\ModelChangesHistory\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Antonrom\\ModelChangesHistory\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Antonrom\\ModelChangesHistory\\Providers\\ModelChangesHistoryServiceProvider"
+      ]
+    }
+  }
+}
