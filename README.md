@@ -112,7 +112,7 @@ $testModel->latestChangeMorph();
 $testModel->historyChangesMorph();
 ```
 
-#### Get an independent change history:
+#### Get an independent changes history:
 
 ```php
 use Antonrom\ModelChangesHistory\Facades\HistoryStorage;
