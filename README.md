@@ -80,8 +80,8 @@ Antonrom\ModelChangesHistory\Models\Change {
                 "after": "This is the new title"
             },
             "body": {
-                 "before": "Some old body",  
-                 "after": "This is the new body"
+                "before": "Some old body",  
+                "after": "This is the new body"
             }
         }"
         "changer_type" =>  "App\User"
