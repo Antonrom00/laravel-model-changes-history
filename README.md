@@ -106,7 +106,7 @@ Illuminate\Database\Eloquent\Collection {
 }
 ```
 
-Clearing changes history:
+Clearing history changes:
 ```php
 $testModel->clearHistoryChanges();
 ```
