@@ -106,6 +106,11 @@ Illuminate\Database\Eloquent\Collection {
 }
 ```
 
+Clearing changes history:
+```php
+$testModel->clearHistoryChanges();
+```
+
 If you use `database` driver you can also use morph relations:
 ```php
 $testModel->latestChangeMorph();
@@ -116,7 +121,6 @@ $testModel->historyChangesMorph();
 
 ```php
 use Antonrom\ModelChangesHistory\Facades\HistoryStorage;
-
 ...
 
 $latestChanges = HistoryStorage::getHistoryChanges(); // Return collection fo all latest changes
@@ -125,6 +129,8 @@ $latestChanges = HistoryStorage::getHistoryChanges($testModel); // Return collec
 $latestChange = HistoryStorage::getLatestChange(); // Return latest change
 $latestChange = HistoryStorage::getLatestChange($testModel); // Return latest change for model
 
+HistoryStorage::deleteHistoryChanges(); // This will delete all history changes
+HistoryStorage::deleteHistoryChanges($testModel); // This will delete all history changes for model
 ```
 
 Getting model changer:

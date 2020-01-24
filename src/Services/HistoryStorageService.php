@@ -6,6 +6,7 @@ use Antonrom\ModelChangesHistory\Models\Change;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,11 @@ class HistoryStorageService
      * @var string
      */
     protected $defaultDriver;
+
+    /**
+     * @var string
+     */
+    protected $tableName;
 
     /**
      * @var \Illuminate\Redis\Connections\Connection
@@ -50,6 +56,10 @@ class HistoryStorageService
         $this->defaultDriver = config('model_changes_history.default_driver');
 
         switch ($this->defaultDriver) {
+            case 'database':
+                $this->tableName = config('model_changes_history.stores.database.table');
+
+                break;
             case 'redis':
                 $this->redis = Redis::connection(config('model_changes_history.stores.redis.connection'));
                 $this->redisKey = config('model_changes_history.stores.redis.key');
@@ -109,17 +119,26 @@ class HistoryStorageService
         return $this->getHistoryChanges($model)->last();
     }
 
-    public function deleteHistoryChanges(Model $model): void
+    public function deleteHistoryChanges(?Model $model = null): void
     {
         switch ($this->defaultDriver) {
             case 'database':
-                $model->historyChangesMorph()->delete();
+                $model
+                    ? $model->historyChangesMorph()->delete()
+                    : DB::table($this->tableName)->truncate();
+
                 return;
             case 'redis':
-                $this->deleteHistoryChangesFromRedis($model);
+                $model
+                    ? $this->deleteHistoryChangesFromRedis($model)
+                    : $this->redis->zremrangebyrank($this->redisKey, 0, -1);
+
                 return;
             case 'file':
-                $this->deleteHistoryChangesFromFile($model);
+                $model
+                    ? $this->deleteHistoryChangesFromFile($model)
+                    : $this->fileStorage->delete($this->fileName);
+
                 return;
             default:
                 return;
@@ -185,7 +204,7 @@ class HistoryStorageService
 
     protected function deleteHistoryChangesFromFile(Model $model): void
     {
-        $historyChanges = $this->getChangesFromFile();
+        $historyChanges = $this->getAllChangesFromFile();
         $this->fileStorage->delete($this->fileName);
 
         $newHistoryChanges = $historyChanges->where('model_type', get_class($model))
