@@ -9,7 +9,7 @@ composer require antonrom00/laravel-model-changes-history
 ```
 
 ```
-php artisan vendor:publish --tag="model-history"
+php artisan vendor:publish --tag="model-changes-history"
 ```
 
 ```
@@ -42,16 +42,16 @@ php artisan migrate
 
 Use this environment to manage library:
 ```
-# Global recorgin model history changes
+# Global recorgin model changes history
 RECORD_CHANGES_HISTORY=true
 
-# Default driver for recorgin model history changes
+# Default driver for recorgin model changes history
 MODEL_CHANGES_HISTORY_DRIVER=database
 ```
 
 ## Usage
 
-Add the trait to your model class you want to record changes for:
+Add the trait to your model class you want to record changes history for:
 ```php
 use Antonrom\ModelChangesHistory\Traits\HasChangesHistory;
 use Illuminate\Database\Eloquent\Model;
@@ -106,12 +106,12 @@ Illuminate\Database\Eloquent\Collection {
 }
 ```
 
-Clearing history changes:
+Clearing changes history:
 ```php
 $testModel->clearHistoryChanges();
 ```
 
-If you use `database` driver you can also use morph relations:
+If you use `database` driver you can also use morph relations to `Change` model:
 ```php
 $testModel->latestChangeMorph();
 $testModel->historyChangesMorph();
@@ -139,7 +139,7 @@ Getting model changer:
 $changer = $latestChange->changer; 
 ```
 
-If you use `database` driver you can use Change model as:
+If you use `database` driver you can use `Change` model as:
 ```php
 use Antonrom\ModelChangesHistory\Models\Change;
 

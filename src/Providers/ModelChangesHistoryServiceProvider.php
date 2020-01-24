@@ -28,7 +28,7 @@ class ModelChangesHistoryServiceProvider extends ServiceProvider
 
         $this->publishes($configDir, 'config');
         $this->publishes($migrationDir, 'migrations');
-        $this->publishes(array_merge($configDir, $migrationDir), 'model-history');
+        $this->publishes(array_merge($configDir, $migrationDir), 'model-changes-history');
     }
 
     /**
