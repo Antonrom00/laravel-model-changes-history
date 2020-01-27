@@ -4,6 +4,8 @@ Records the changes history made to an eloquent model.
 
 ## Quick installation
 
+**Your model must have an `id` field!**
+
 ```bash
 composer require antonrom00/laravel-model-changes-history
 ```
