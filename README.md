@@ -62,6 +62,7 @@ class TestModel extends Model {
     /**
      * The attributes that are mass assignable.
      * This will also be hidden for changes history.
+     *
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
