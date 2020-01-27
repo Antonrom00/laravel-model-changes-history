@@ -4,7 +4,7 @@ namespace Antonrom\ModelChangesHistory\Tests\Unit;
 
 use Antonrom\ModelChangesHistory\Facades\ChangesHistory;
 use Antonrom\ModelChangesHistory\Models\Change;
-use Antonrom\ModelChangesHistory\Tests\Models\TestModel;
+use Antonrom\ModelChangesHistory\Tests\fixtures\TestModel;
 use Antonrom\ModelChangesHistory\Tests\TestCase;
 
 class ChangesHistoryServiceTest extends TestCase

@@ -4,49 +4,49 @@ Records the changes history made to an eloquent model.
 
 ## Quick installation
 
-```
+```bash
 composer require antonrom00/laravel-model-changes-history
 ```
 
-```
+```bash
 php artisan vendor:publish --tag="model-changes-history"
 ```
 
-```
+```bash
 php artisan migrate
 ```
 
-**Note: this library use `database` driver as default.**
+**Note: this library use `database` storage as default.**
 
 ## Installation
-```
+```bash
 composer require antonrom00/laravel-model-changes-history
 ```
 
 The package is auto discovered.
 
 To change the config, publish it using the following command:
-```
+```bash
 php artisan vendor:publish --provider="Antonrom\ModelChangesHistory\Providers\ModelChangesHistoryServiceProvider" --tag="config"
 ```
 
-You can use three ways for record changes: `'default_driver' => 'database', 'file' or 'redis'`
+You can use three ways for record changes: `'storage' => 'database', 'file' or 'redis'`
 
-If you want to use `database` driver, you must publish the migration file, run the following artisan commands:
-```
+If you want to use `database` storage, you must publish the migration file, run the following artisan commands:
+```bash
 php artisan vendor:publish --provider="Antonrom\ModelChangesHistory\Providers\ModelChangesHistoryServiceProvider" --tag="migrations"
 ```
-```
+```bash
 php artisan migrate
 ```
 
 Use this environment to manage library:
-```
+```dotenv
 # Global recorgin model changes history
 RECORD_CHANGES_HISTORY=true
 
-# Default driver for recorgin model changes history
-MODEL_CHANGES_HISTORY_DRIVER=database
+# Default storage for recorgin model changes history
+MODEL_CHANGES_HISTORY_STORAGE=database
 ```
 
 ## Usage
@@ -58,6 +58,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestModel extends Model {
     use HasChangesHistory;
+
+    /**
+     * The attributes that are mass assignable.
+     * This will also be hidden for changes history.
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 }
 
 ```
@@ -82,6 +89,10 @@ Antonrom\ModelChangesHistory\Models\Change {
             "body": {
                 "before": "Some old body",  
                 "after": "This is the new body"
+            },
+            "password": {
+                "before": "[hidden]",  
+                "after": "[hidden]"
             }
         }"
         "changer_type" =>  "App\User"
@@ -111,7 +122,7 @@ Clearing changes history:
 $testModel->clearHistoryChanges();
 ```
 
-If you use `database` driver you can also use morph relations to `Change` model:
+If you use `database` storage you can also use morph relations to `Change` model:
 ```php
 $testModel->latestChangeMorph();
 $testModel->historyChangesMorph();
@@ -139,7 +150,12 @@ Getting model changer:
 $changer = $latestChange->changer; 
 ```
 
-If you use `database` driver you can use `Change` model as:
+Clearing changes history using console:
+```bash
+php artisan changes-history:clear
+```
+
+If you use `database` storage you can use `Change` model as:
 ```php
 use Antonrom\ModelChangesHistory\Models\Change;
 

@@ -45,7 +45,7 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             'ChangesHistory' => 'Antonrom\ModelChangesHistory\Facade\HistoryChanges',
-            'HistoryStorage' => 'Antonrom\ModelChangesHistory\Facade\HistoryStorage',
+            'Storages' => 'Antonrom\ModelChangesHistory\Facade\HistoryStorage',
         ];
     }
 
@@ -59,7 +59,7 @@ abstract class TestCase extends BaseTestCase
     {
         // Setup default database to use sqlite :memory:
         $app['config']->set('app.debug', true);
-        $app['config']->set('model_changes_history.default_driver', 'database');
+        $app['config']->set('model_changes_history.storage', 'database');
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
             'driver'   => 'sqlite',

@@ -9,6 +9,8 @@ use Illuminate\Support\Collection;
 
 class ChangesHistoryService
 {
+    const VALUE_HIDDEN = '[hidden]';
+
     /**
      * @var bool
      */
@@ -53,13 +55,23 @@ class ChangesHistoryService
     protected function getAttributesChanges(Model $model, ?Model $originalModel = null): Collection
     {
         $originalModel = $originalModel ? : $this->getOriginalModel($model);
+        $hiddenFields = $model->getHidden();
         $attributesChanges = collect();
 
         foreach ($model->getChanges() as $key => $afterValue) {
-            $attributesChanges->put($key, [
-                'before' => $originalModel->$key,
-                'after'  => $afterValue,
-            ]);
+            if (!in_array($key, $hiddenFields)) {
+                $change = [
+                    'before' => $originalModel->$key,
+                    'after'  => $afterValue,
+                ];
+            } else {
+                $change = [
+                    'before' => self::VALUE_HIDDEN,
+                    'after'  => self::VALUE_HIDDEN,
+                ];
+            }
+
+            $attributesChanges->put($key, $change);
         }
 
         return $attributesChanges;

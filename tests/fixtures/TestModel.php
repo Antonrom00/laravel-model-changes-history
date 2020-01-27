@@ -1,6 +1,6 @@
 <?php
 
-namespace Antonrom\ModelChangesHistory\Tests\Models;
+namespace Antonrom\ModelChangesHistory\Tests\fixtures;
 
 use Antonrom\ModelChangesHistory\Traits\HasChangesHistory;
 use Illuminate\Database\Eloquent\Model;

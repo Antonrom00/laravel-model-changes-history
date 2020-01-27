@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'default_driver' => env('MODEL_CHANGES_HISTORY_DRIVER', 'database'),
+    'storage' => env('MODEL_CHANGES_HISTORY_STORAGE', 'database'),
 
     /*
     |--------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 
 namespace Antonrom\ModelChangesHistory\Providers;
 
+use Antonrom\ModelChangesHistory\Console\Commands\ChangesHistoryClearCommand;
 use Antonrom\ModelChangesHistory\Services\HistoryStorageService;
 use Antonrom\ModelChangesHistory\Services\ChangesHistoryService;
 use Illuminate\Support\ServiceProvider;
@@ -50,5 +51,7 @@ class ModelChangesHistoryServiceProvider extends ServiceProvider
 
         $this->app->bind('changesHistory', ChangesHistoryService::class);
         $this->app->bind('historyStorage', HistoryStorageService::class);
+
+        $this->commands(ChangesHistoryClearCommand::class);
     }
 }
