@@ -105,7 +105,7 @@ Antonrom\ModelChangesHistory\Models\Change {
 }
 ```
 
-Getting all changes history:
+#### Getting all changes history:
 ```php
 $testModel->historyChanges();
 
@@ -118,15 +118,16 @@ Illuminate\Database\Eloquent\Collection {
 }
 ```
 
-Clearing changes history:
-```php
-$testModel->clearHistoryChanges();
-```
 
-If you use `database` storage you can also use morph relations to `Change` model:
+**If you use `database` storage you can also use morph relations to `Change` model:**
 ```php
 $testModel->latestChangeMorph();
 $testModel->historyChangesMorph();
+```
+
+#### Clearing changes history: 
+```php
+$testModel->clearHistoryChanges();
 ```
 
 #### Get an independent changes history:
@@ -145,18 +146,13 @@ HistoryStorage::deleteHistoryChanges(); // This will delete all history changes
 HistoryStorage::deleteHistoryChanges($testModel); // This will delete all history changes for model
 ```
 
-Getting model changer:
+#### Getting model changer:
 ```php
 // Return Authenticatable `changer_type` using HasOne relation to changer_type and changer_id
 $changer = $latestChange->changer; 
 ```
 
-Clearing changes history using console:
-```bash
-php artisan changes-history:clear
-```
-
-If you use `database` storage you can use `Change` model as:
+##### If you use `database` storage you can use `Change` model as:
 ```php
 use Antonrom\ModelChangesHistory\Models\Change;
 
@@ -167,4 +163,17 @@ Change::query()
     ->whereType(Change::TYPE_UPDATED)
     ->whereCreatedBetween(now()->subDays(30), now())
     ->get();
+```
+
+#### Clearing changes history using console:
+```bash
+php artisan changes-history:clear
+```
+
+You can use it in `Kelner`: 
+```php
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command('changes-history:clear')->monthly();
+}
 ```
