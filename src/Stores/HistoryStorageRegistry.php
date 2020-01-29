@@ -2,7 +2,6 @@
 
 namespace Antonrom\ModelChangesHistory\Stores;
 
-use Antonrom\ModelChangesHistory\Exceptions\StorageForFoundException;
 use Antonrom\ModelChangesHistory\Exceptions\StorageNotFoundException;
 use Antonrom\ModelChangesHistory\Interfaces\HistoryStorageInterface;
 
@@ -14,6 +13,11 @@ class HistoryStorageRegistry
 
     private $container = [];
 
+    /**
+     * Create the instance of the class with default history stores
+     *
+     * @return static
+     */
     public static function create(): self
     {
         return (new self())
@@ -23,9 +27,12 @@ class HistoryStorageRegistry
     }
 
     /**
+     * Add the new history storage to container
+     *
      * @param string $name
      * @param HistoryStorageInterface $storage
-     * @return void
+     *
+     * @return HistoryStorageRegistry
      */
     public function add(string $name, HistoryStorageInterface $storage): self
     {
@@ -35,7 +42,10 @@ class HistoryStorageRegistry
     }
 
     /**
+     * Get the instance of the class history storage from container
+     *
      * @param string $name
+     *
      * @return HistoryStorageInterface
      * @throws StorageNotFoundException
      */

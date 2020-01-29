@@ -36,7 +36,7 @@ class Change extends Model
         'created_at',
     ];
 
-    protected $casts = ['created_at' => 'datetime'];
+    protected $casts = [self::CREATED_AT => 'datetime'];
 
     public function getTable(): string
     {
@@ -60,7 +60,7 @@ class Change extends Model
 
     public function scopeWhereCreatedBetween(Builder $query, CarbonInterface $from, CarbonInterface $to): Builder
     {
-        return $query->whereBetween('created_at', [$from, $to]);
+        return $query->whereBetween(self::CREATED_AT, [$from, $to]);
     }
 
     public function scopeWhereType(Builder $query, string $type): Builder
