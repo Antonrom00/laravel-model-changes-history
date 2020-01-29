@@ -22,15 +22,13 @@ class CreateModelChangesHistoryTable extends Migration
      */
     public function up()
     {
-        $this->connection;
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('model_id');
-
             $table->string('model_type');
 
-            $table->json('before_changes');
+            $table->json('before_changes')->nullable(;
             $table->json('after_changes')->nullable();
 
             $table->json('changes')->nullable();
@@ -48,7 +46,7 @@ class CreateModelChangesHistoryTable extends Migration
 
             $table->json('stack_trace')->nullable();
 
-            $table->timestamp('created_at');
+            $table->timestamp(Change::CREATED_AT);
         });
     }
 
