@@ -28,7 +28,7 @@ class CreateModelChangesHistoryTable extends Migration
             $table->unsignedBigInteger('model_id');
             $table->string('model_type');
 
-            $table->json('before_changes')->nullable(;
+            $table->json('before_changes')->nullable();
             $table->json('after_changes')->nullable();
 
             $table->json('changes')->nullable();
