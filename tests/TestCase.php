@@ -78,7 +78,7 @@ abstract class TestCase extends BaseTestCase
             $table->increments('id');
             $table->string('title')->nullable();
             $table->string('body')->nullable();
-            $table->timestamps();
+            $table->string('password')->nullable();
             $table->softDeletes();
         });
     }

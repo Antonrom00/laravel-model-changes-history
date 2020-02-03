@@ -3,6 +3,7 @@
 namespace Antonrom\ModelChangesHistory\Tests\Unit;
 
 use Antonrom\ModelChangesHistory\Models\Change;
+use Antonrom\ModelChangesHistory\Services\ChangesHistoryService;
 use Antonrom\ModelChangesHistory\Tests\fixtures\TestModel;
 use Antonrom\ModelChangesHistory\Tests\TestCase;
 
@@ -24,8 +25,9 @@ class HistoryStorageServiceTest extends TestCase
 
         $this->table = config('model_changes_history.stores.database.table');
         $this->testModel = TestModel::create([
-            'title' => 'Test title',
-            'body'  => 'Test body',
+            'title'    => 'Test title',
+            'body'     => 'Test body',
+            'password' => 'Test password',
         ]);
     }
 
@@ -41,8 +43,9 @@ class HistoryStorageServiceTest extends TestCase
     {
         $originalModel = clone $this->testModel;
         $this->testModel->update([
-            'title' => 'Test title updated',
-            'body'  => 'Test body updated',
+            'title'    => 'Test title updated',
+            'body'     => 'Test body updated',
+            'password' => 'Test password updated',
         ]);
 
         $this->assertDatabaseHas($this->table, [
@@ -57,6 +60,10 @@ class HistoryStorageServiceTest extends TestCase
                 'body'  => [
                     'before' => $originalModel->body,
                     'after'  => $this->testModel->body,
+                ],
+                'password'  => [
+                    'before' => ChangesHistoryService::VALUE_HIDDEN,
+                    'after'  => ChangesHistoryService::VALUE_HIDDEN,
                 ],
             ]),
         ]);

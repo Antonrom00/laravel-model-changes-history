@@ -10,7 +10,11 @@ class TestModel extends Model
 {
     use HasChangesHistory, SoftDeletes;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'password'];
+
+    protected $hidden = ['password'];
 
     protected $guarded = [];
+
+    public $timestamps = false;
 }
