@@ -51,6 +51,8 @@ RECORD_CHANGES_HISTORY=true
 MODEL_CHANGES_HISTORY_STORAGE=database
 ```
 
+**Explore the [config](https://github.com/Antonrom00/laravel-model-changes-history/blob/master/publishable/config/model_changes_history.php) for more detailed library setup.**
+
 ## Usage
 
 Add the trait to your model class you want to record changes history for:
