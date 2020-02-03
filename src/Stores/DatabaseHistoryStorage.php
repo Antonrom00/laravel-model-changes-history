@@ -32,7 +32,7 @@ class DatabaseHistoryStorage implements HistoryStorageInterface
 
     public function getLatestChange(?Model $model = null): ?Change
     {
-        return $model->latestChangeMorph;
+        return $model ? $model->latestChangeMorph : $this->getHistoryChanges()->last();
     }
 
     public function deleteHistoryChanges(?Model $model = null): void
