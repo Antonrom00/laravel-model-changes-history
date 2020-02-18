@@ -10,11 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ModelChangesHistoryObserver
 {
+    /**
+     * @var array
+     */
     protected $ignoredActions;
 
     public function __construct()
     {
-        $this->ignoredActions = config('model_changes_history.ignored_actions');
+        $this->ignoredActions = config('model_changes_history.ignored_actions', []);
     }
 
     public function created(Model $model)

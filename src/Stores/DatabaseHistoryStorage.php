@@ -17,7 +17,7 @@ class DatabaseHistoryStorage implements HistoryStorageInterface
 
     public function __construct()
     {
-        $this->tableName = config('model_changes_history.stores.database.table');
+        $this->tableName = config('model_changes_history.stores.database.table', 'model_changes_history');
     }
 
     public function recordChange(Change $change): void

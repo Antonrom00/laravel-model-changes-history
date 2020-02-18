@@ -40,7 +40,7 @@ class Change extends Model
 
     public function getTable(): string
     {
-        return config('model_changes_history.stores.database.table');
+        return config('model_changes_history.stores.database.table', 'model_changes_history');
     }
 
 

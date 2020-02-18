@@ -23,8 +23,8 @@ class FileHistoryStorage implements HistoryStorageInterface
 
     public function __construct()
     {
-        $this->storage = Storage::disk(config('model_changes_history.stores.file.disk'));
-        $this->fileName = config('model_changes_history.stores.file.file_name');
+        $this->storage = Storage::disk(config('model_changes_history.stores.file.disk', 'model_changes_history'));
+        $this->fileName = config('model_changes_history.stores.file.file_name', 'changes_history.txt');
     }
 
     public function recordChange(Change $change): void

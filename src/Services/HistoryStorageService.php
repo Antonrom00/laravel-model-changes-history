@@ -28,15 +28,16 @@ class HistoryStorageService
      */
     public function __construct()
     {
-        $recordChangesOnlyForDebug = config('model_changes_history.use_only_for_debug')
+        $recordChangesOnlyForDebug = config('model_changes_history.use_only_for_debug', true)
             ? config('app.debug')
             : true;
 
-        $this->recordHistoryChanges = config('model_changes_history.record_changes_history')
+        $this->recordHistoryChanges = config('model_changes_history.record_changes_history', true)
             ? $recordChangesOnlyForDebug
             : false;
 
-        $this->historyStorage = HistoryStorageRegistry::create()->get(config('model_changes_history.storage'));
+        $this->historyStorage = HistoryStorageRegistry::create()
+            ->get(config('model_changes_history.storage', HistoryStorageRegistry::STORAGE_DATABASE));
     }
 
     public function recordChange(Change $change): void

@@ -20,7 +20,7 @@ class ModelChangesHistoryServiceProvider extends ServiceProvider
         ];
 
         $timestamp = date('Y_m_d_His', time());
-        $tableName = config('model_changes_history.stores.database.table');
+        $tableName = config('model_changes_history.stores.database.table', 'model_changes_history');
 
         $migrationDir = [
             __DIR__ . '/../../publishable/database/migrations/create_model_changes_history_table.php' =>

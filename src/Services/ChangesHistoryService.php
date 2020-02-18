@@ -18,7 +18,7 @@ class ChangesHistoryService
 
     public function __construct()
     {
-        $this->recordStackTrace = config('model_changes_history.record_stack_trace');
+        $this->recordStackTrace = config('model_changes_history.record_stack_trace', true);
     }
 
     public function createChange(string $type, Model $model, ?Authenticatable $changer = null): Change

@@ -11,8 +11,8 @@ class CreateModelChangesHistoryTable extends Migration
 
     public function __construct()
     {
-        $this->connection = config('model_changes_history.stores.database.connection');
-        $this->tableName = config('model_changes_history.stores.database.table');
+        $this->connection = config('model_changes_history.stores.database.connection', null);
+        $this->tableName = config('model_changes_history.stores.database.table', 'model_changes_history');
     }
 
     /**

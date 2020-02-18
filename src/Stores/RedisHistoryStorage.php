@@ -22,8 +22,8 @@ class RedisHistoryStorage implements HistoryStorageInterface
 
     public function __construct()
     {
-        $this->connection = Redis::connection(config('model_changes_history.stores.redis.connection'));
-        $this->key = config('model_changes_history.stores.redis.key');
+        $this->connection = Redis::connection(config('model_changes_history.stores.redis.connection', 'model_changes_history'));
+        $this->key = config('model_changes_history.stores.redis.key', 'model_changes_history');
     }
 
     public function recordChange(Change $change): void
