@@ -20,7 +20,16 @@ class ChangesHistoryServiceTest extends TestCase
 
         $this->assertEquals(Change::TYPE_CREATED, $change->change_type);
         $this->assertEquals(get_class($testModel), $change->model_type);
-        $this->assertEquals(collect(), $change->changes);
+        $this->assertEquals(collect([
+            'title' => [
+                'before' => null,
+                'after' => 'Test title'
+            ],
+            'body' => [
+                'before' => null,
+                'after' => 'Test body'
+            ]
+        ]), $change->changes);
         $this->assertNull($change->changer_type);
     }
 }

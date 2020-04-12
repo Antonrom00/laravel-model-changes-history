@@ -58,11 +58,16 @@ class ChangesHistoryService
         $hiddenFields = $model->getHidden();
         $attributesChanges = collect();
 
-        foreach ($model->getChanges() as $key => $afterValue) {
+        $changes = $model->getChanges();
+        if (empty($changes)) {
+            $changes = array_diff_assoc($model->toArray(), $originalModel->toArray());
+        }
+
+        foreach ($changes as $key => $afterValue) {
             if (!in_array($key, $hiddenFields)) {
                 $change = [
                     'before' => $originalModel->$key,
-                    'after'  => $afterValue,
+                    'after' => $model->$key,
                 ];
             } else {
                 $change = [
