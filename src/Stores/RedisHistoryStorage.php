@@ -5,13 +5,14 @@ namespace Antonrom\ModelChangesHistory\Stores;
 use Antonrom\ModelChangesHistory\Interfaces\HistoryStorageInterface;
 use Antonrom\ModelChangesHistory\Models\Change;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Redis\Connections\Connection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redis;
 
 class RedisHistoryStorage implements HistoryStorageInterface
 {
     /**
-     * @var \Illuminate\Redis\Connections\Connection
+     * @var Connection
      */
     protected $connection;
 

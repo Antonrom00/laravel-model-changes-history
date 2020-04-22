@@ -67,7 +67,7 @@ class ChangesHistoryService
             if (!in_array($key, $hiddenFields)) {
                 $change = [
                     'before' => $originalModel->$key,
-                    'after' => $model->$key,
+                    'after'  => $model->$key,
                 ];
             } else {
                 $change = [

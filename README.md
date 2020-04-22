@@ -2,6 +2,8 @@
 
 Records the changes history made to an eloquent model.
 
+[![Total Downloads](https://img.shields.io/packagist/dt/antonrom00/laravel-model-changes-history.svg?style=flat-square)](https://packagist.org/packages/antonrom00/laravel-model-changes-history)
+
 ## Quick installation
 
 **Your model must have an `id` field!**

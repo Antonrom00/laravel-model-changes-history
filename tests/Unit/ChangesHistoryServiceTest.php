@@ -23,12 +23,12 @@ class ChangesHistoryServiceTest extends TestCase
         $this->assertEquals(collect([
             'title' => [
                 'before' => null,
-                'after' => 'Test title'
+                'after'  => 'Test title',
             ],
-            'body' => [
+            'body'  => [
                 'before' => null,
-                'after' => 'Test body'
-            ]
+                'after'  => 'Test body',
+            ],
         ]), $change->changes);
         $this->assertNull($change->changer_type);
     }
