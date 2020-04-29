@@ -3,6 +3,7 @@
 Records the changes history made to an eloquent model.
 
 [![Total Downloads](https://img.shields.io/packagist/dt/antonrom00/laravel-model-changes-history.svg?style=flat-square)](https://packagist.org/packages/antonrom00/laravel-model-changes-history)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=P58FVTP9QTTEW&source=url)
 
 ## Quick installation
 
@@ -183,3 +184,8 @@ protected function schedule(Schedule $schedule)
     $schedule->command('changes-history:clear')->monthly();
 }
 ```
+## Donation
+
+If this project help you reduce time to develop, you can give me a cup of coffee [![buy_me_a_coffee](https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg)](https://www.buymeacoffee.com/antonrom) =)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=P58FVTP9QTTEW&source=url)
