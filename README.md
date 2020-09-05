@@ -143,8 +143,8 @@ $testModel->clearHistoryChanges();
 use Antonrom\ModelChangesHistory\Facades\HistoryStorage;
 ...
 
-$latestChanges = HistoryStorage::getHistoryChanges(); // Return collection fo all latest changes
-$latestChanges = HistoryStorage::getHistoryChanges($testModel); // Return collection fo all latest changes for model
+$latestChanges = HistoryStorage::getHistoryChanges(); // Return collection of all latest changes
+$latestChanges = HistoryStorage::getHistoryChanges($testModel); // Return collection of all latest changes for model
 
 $latestChange = HistoryStorage::getLatestChange(); // Return latest change
 $latestChange = HistoryStorage::getLatestChange($testModel); // Return latest change for model
