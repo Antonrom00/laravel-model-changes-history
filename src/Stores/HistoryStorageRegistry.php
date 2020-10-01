@@ -20,13 +20,13 @@ class HistoryStorageRegistry
     private $container = [];
 
     /**
-     * Create the instance of the class with default history stores
+     * Create the instance of the class
      *
      * @return static
      */
     public static function create(): self
     {
-        return (new self());
+        return new self();
     }
 
     /**
