@@ -13,8 +13,8 @@ class HistoryStorageRegistry
 
     private $storagesMap = [
         self::STORAGE_DATABASE => DatabaseHistoryStorage::class,
-        self::STORAGE_REDIS => RedisHistoryStorage::class,
-        self::STORAGE_FILE => FileHistoryStorage::class,
+        self::STORAGE_REDIS    => RedisHistoryStorage::class,
+        self::STORAGE_FILE     => FileHistoryStorage::class,
     ];
 
     private $container = [];
