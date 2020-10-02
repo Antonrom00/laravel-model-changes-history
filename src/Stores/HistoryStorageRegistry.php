@@ -7,38 +7,26 @@ use Antonrom\ModelChangesHistory\Interfaces\HistoryStorageInterface;
 
 class HistoryStorageRegistry
 {
-    const STORAGE_DATABASE = 'database';
-    const STORAGE_REDIS = 'redis';
-    const STORAGE_FILE = 'file';
+    public const STORAGE_DATABASE = 'database';
+    public const STORAGE_REDIS = 'redis';
+    public const STORAGE_FILE = 'file';
+
+    private $storagesMap = [
+        self::STORAGE_DATABASE => DatabaseHistoryStorage::class,
+        self::STORAGE_REDIS    => RedisHistoryStorage::class,
+        self::STORAGE_FILE     => FileHistoryStorage::class,
+    ];
 
     private $container = [];
 
     /**
-     * Create the instance of the class with default history stores
+     * Create the instance of the class
      *
      * @return static
      */
     public static function create(): self
     {
-        return (new self())
-            ->add(self::STORAGE_DATABASE, new DatabaseHistoryStorage())
-            ->add(self::STORAGE_REDIS, new RedisHistoryStorage())
-            ->add(self::STORAGE_FILE, new FileHistoryStorage());
-    }
-
-    /**
-     * Add the new history storage to container
-     *
-     * @param string $name
-     * @param HistoryStorageInterface $storage
-     *
-     * @return HistoryStorageRegistry
-     */
-    public function add(string $name, HistoryStorageInterface $storage): self
-    {
-        $this->container[$name] = $storage;
-
-        return $this;
+        return new self();
     }
 
     /**
@@ -51,8 +39,12 @@ class HistoryStorageRegistry
      */
     public function get(string $name): HistoryStorageInterface
     {
-        if (!isset($this->container[$name])) {
+        if (!isset($this->storagesMap[$name])) {
             throw new StorageNotFoundException;
+        }
+
+        if (!isset($this->container[$name])) {
+            $this->container[$name] = new $this->storagesMap[$name];
         }
 
         return $this->container[$name];
