@@ -45,7 +45,7 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             'ChangesHistory' => 'Antonrom\ModelChangesHistory\Facade\HistoryChanges',
-            'Storages' => 'Antonrom\ModelChangesHistory\Facade\HistoryStorage',
+            'Storages'       => 'Antonrom\ModelChangesHistory\Facade\HistoryStorage',
         ];
     }
 

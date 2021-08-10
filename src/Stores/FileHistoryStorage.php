@@ -5,6 +5,7 @@ namespace Antonrom\ModelChangesHistory\Stores;
 use Antonrom\ModelChangesHistory\Interfaces\HistoryStorageInterface;
 use Antonrom\ModelChangesHistory\Models\Change;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class FileHistoryStorage implements HistoryStorageInterface
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $storage;
 
@@ -23,7 +24,7 @@ class FileHistoryStorage implements HistoryStorageInterface
 
     public function __construct()
     {
-        $this->storage = Storage::disk(config('model_changes_history.stores.file.disk', 'model_changes_history'));
+        $this->storage  = Storage::disk(config('model_changes_history.stores.file.disk', 'model_changes_history'));
         $this->fileName = config('model_changes_history.stores.file.file_name', 'changes_history.txt');
     }
 

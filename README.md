@@ -24,6 +24,7 @@ php artisan migrate
 **Note: this library use `database` storage as default.**
 
 ## Installation
+
 ```bash
 composer require antonrom00/laravel-model-changes-history
 ```
@@ -31,6 +32,7 @@ composer require antonrom00/laravel-model-changes-history
 The package is auto discovered.
 
 To change the config, publish it using the following command:
+
 ```bash
 php artisan vendor:publish --provider="Antonrom\ModelChangesHistory\Providers\ModelChangesHistoryServiceProvider" --tag="config"
 ```
@@ -38,14 +40,17 @@ php artisan vendor:publish --provider="Antonrom\ModelChangesHistory\Providers\Mo
 You can use three ways for record changes: `'storage' => 'database', 'file' or 'redis'`
 
 If you want to use `database` storage, you must publish the migration file, run the following artisan commands:
+
 ```bash
 php artisan vendor:publish --provider="Antonrom\ModelChangesHistory\Providers\ModelChangesHistoryServiceProvider" --tag="migrations"
 ```
+
 ```bash
 php artisan migrate
 ```
 
 Use this environment to manage library:
+
 ```dotenv
 # Global recorgin model changes history
 RECORD_CHANGES_HISTORY=true
@@ -54,11 +59,14 @@ RECORD_CHANGES_HISTORY=true
 MODEL_CHANGES_HISTORY_STORAGE=database
 ```
 
-**Explore the [config](https://github.com/Antonrom00/laravel-model-changes-history/blob/master/publishable/config/model_changes_history.php) for more detailed library setup.**
+**Explore
+the [config](https://github.com/Antonrom00/laravel-model-changes-history/blob/master/publishable/config/model_changes_history.php)
+for more detailed library setup.**
 
 ## Usage
 
 Add the trait to your model class you want to record changes history for:
+
 ```php
 use Antonrom\ModelChangesHistory\Traits\HasChangesHistory;
 use Illuminate\Database\Eloquent\Model;
@@ -78,6 +86,7 @@ class TestModel extends Model {
 ```
 
 Your model now has a relation to all the changes made:
+
 ```php
 $testModel->latestChange();
 
@@ -113,6 +122,7 @@ Antonrom\ModelChangesHistory\Models\Change {
 ```
 
 #### Getting all changes history:
+
 ```php
 $testModel->historyChanges();
 
@@ -125,14 +135,15 @@ Illuminate\Database\Eloquent\Collection {
 }
 ```
 
-
 **If you use `database` storage you can also use morph relations to `Change` model:**
+
 ```php
 $testModel->latestChangeMorph();
 $testModel->historyChangesMorph();
 ```
 
-#### Clearing changes history: 
+#### Clearing changes history:
+
 ```php
 $testModel->clearHistoryChanges();
 ```
@@ -154,12 +165,14 @@ HistoryStorage::deleteHistoryChanges($testModel); // This will delete all histor
 ```
 
 #### Getting model changer:
+
 ```php
 // Return Authenticatable `changer_type` using HasOne relation to changer_type and changer_id
 $changer = $latestChange->changer; 
 ```
 
 ##### If you use `database` storage you can use `Change` model as:
+
 ```php
 use Antonrom\ModelChangesHistory\Models\Change;
 
@@ -173,19 +186,24 @@ Change::query()
 ```
 
 #### Clearing changes history using console:
+
 ```bash
 php artisan changes-history:clear
 ```
 
-You can use it in `Kelner`: 
+You can use it in `Kelner`:
+
 ```php
 protected function schedule(Schedule $schedule)
 {
     $schedule->command('changes-history:clear')->monthly();
 }
 ```
+
 ## Donation
 
-If this project help you reduce time to develop, you can buy me a cup of coffee [![buy_me_a_coffee](https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg)](https://www.buymeacoffee.com/antonrom) =)
+If this project help you reduce time to develop, you can buy me a cup of
+coffee [![buy_me_a_coffee](https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg)](https://www.buymeacoffee.com/antonrom)
+=)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=P58FVTP9QTTEW&source=url)

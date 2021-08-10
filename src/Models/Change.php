@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Change extends Model
 {
-    const TYPE_CREATED = 'created';
-    const TYPE_UPDATED = 'updated';
-    const TYPE_DELETED = 'deleted';
-    const TYPE_RESTORED = 'restored';
-    const TYPE_FORCE_DELETED = 'forceDeleted';
+    public const TYPE_CREATED       = 'created';
+    public const TYPE_UPDATED       = 'updated';
+    public const TYPE_DELETED       = 'deleted';
+    public const TYPE_RESTORED      = 'restored';
+    public const TYPE_FORCE_DELETED = 'forceDeleted';
 
     public $timestamps = false;
 
@@ -82,4 +82,5 @@ class Change extends Model
     {
         return $this->hasOne($this->changer_type, 'id', 'changer_id');
     }
+
 }

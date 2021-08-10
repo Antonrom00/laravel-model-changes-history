@@ -23,7 +23,7 @@ class HistoryStorageServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->table = config('model_changes_history.stores.database.table');
+        $this->table     = config('model_changes_history.stores.database.table');
         $this->testModel = TestModel::create([
             'title'    => 'Test title',
             'body'     => 'Test body',
@@ -53,15 +53,15 @@ class HistoryStorageServiceTest extends TestCase
             'model_type'  => get_class($this->testModel),
             'change_type' => Change::TYPE_UPDATED,
             'changes'     => json_encode([
-                'title' => [
+                'title'    => [
                     'before' => $originalModel->title,
                     'after'  => $this->testModel->title,
                 ],
-                'body'  => [
+                'body'     => [
                     'before' => $originalModel->body,
                     'after'  => $this->testModel->body,
                 ],
-                'password'  => [
+                'password' => [
                     'before' => ChangesHistoryService::VALUE_HIDDEN,
                     'after'  => ChangesHistoryService::VALUE_HIDDEN,
                 ],

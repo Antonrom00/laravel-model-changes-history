@@ -2,7 +2,9 @@
 
 namespace Antonrom\ModelChangesHistory\Exceptions;
 
-class StorageNotFoundException extends \InvalidArgumentException
+use InvalidArgumentException;
+
+class StorageNotFoundException extends InvalidArgumentException
 {
     protected $message = 'No current storage found or installed.';
 }

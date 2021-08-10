@@ -8,8 +8,8 @@ use Antonrom\ModelChangesHistory\Interfaces\HistoryStorageInterface;
 class HistoryStorageRegistry
 {
     public const STORAGE_DATABASE = 'database';
-    public const STORAGE_REDIS = 'redis';
-    public const STORAGE_FILE = 'file';
+    public const STORAGE_REDIS    = 'redis';
+    public const STORAGE_FILE     = 'file';
 
     private $storagesMap = [
         self::STORAGE_DATABASE => DatabaseHistoryStorage::class,

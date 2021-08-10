@@ -12,7 +12,7 @@ class CreateModelChangesHistoryTable extends Migration
     public function __construct()
     {
         $this->connection = config('model_changes_history.stores.database.connection', null);
-        $this->tableName = config('model_changes_history.stores.database.table', 'model_changes_history');
+        $this->tableName  = config('model_changes_history.stores.database.table', 'model_changes_history');
     }
 
     /**
@@ -20,7 +20,7 @@ class CreateModelChangesHistoryTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -55,7 +55,7 @@ class CreateModelChangesHistoryTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop($this->tableName);
     }

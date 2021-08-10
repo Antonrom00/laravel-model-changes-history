@@ -32,7 +32,7 @@ class ChangesHistoryService
             'changes'        => $this->getAttributesChanges($model, $originalModel),
             'change_type'    => $type,
 
-            'changer_type' => $changer ? get_class($changer) : null,
+            'changer_type' => $changer ? $modelType : null,
             'changer_id'   => $changer->id ?? null,
 
             'stack_trace' => $this->getStackStace(),
@@ -45,7 +45,7 @@ class ChangesHistoryService
     {
         $originalModel = clone $model;
         foreach ($model->getAttributes() as $key => $afterValue) {
-            $beforeValue = $model->getOriginal($key);
+            $beforeValue         = $model->getOriginal($key);
             $originalModel->$key = $beforeValue;
         }
 
@@ -54,8 +54,8 @@ class ChangesHistoryService
 
     protected function getAttributesChanges(Model $model, ?Model $originalModel = null): Collection
     {
-        $originalModel = $originalModel ? : $this->getOriginalModel($model);
-        $hiddenFields = $model->getHidden();
+        $originalModel     = $originalModel ? : $this->getOriginalModel($model);
+        $hiddenFields      = $model->getHidden();
         $attributesChanges = collect();
 
         $changes = $model->getChanges();
