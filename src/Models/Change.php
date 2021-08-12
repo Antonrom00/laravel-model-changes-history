@@ -3,12 +3,35 @@
 namespace Antonrom\ModelChangesHistory\Models;
 
 use Carbon\CarbonInterface;
+use DateTime;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+/**
+ * Class Change
+ *
+ * @package Antonrom\ModelChangesHistory\Models
+ *
+ * @property int id
+ *
+ * @property int model_id
+ * @property string model_type
+ *
+ * @property string before_changes
+ * @property string after_changes
+ * @property string changes
+ * @property string change_type
+ *
+ * @property string changer_type
+ * @property int changer_id
+ *
+ * @property string stack_trace
+ *
+ * @property DateTime created_at
+ */
 class Change extends Model
 {
     public const TYPE_CREATED       = 'created';
@@ -37,6 +60,17 @@ class Change extends Model
     ];
 
     protected $casts = [self::CREATED_AT => 'datetime'];
+
+    public static function getTypes(): array
+    {
+        return [
+            Change::TYPE_CREATED,
+            Change::TYPE_UPDATED,
+            Change::TYPE_DELETED,
+            Change::TYPE_RESTORED,
+            Change::TYPE_FORCE_DELETED,
+        ];
+    }
 
     public function getTable(): string
     {
