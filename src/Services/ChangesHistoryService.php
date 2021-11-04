@@ -32,7 +32,7 @@ class ChangesHistoryService
             'changes'        => $this->getAttributesChanges($model, $originalModel),
             'change_type'    => $type,
 
-            'changer_type' => $changer ? $modelType : null,
+            'changer_type' => $changer ? get_class($changer) : null,
             'changer_id'   => $changer->id ?? null,
 
             'stack_trace' => $this->getStackStace(),
